@@ -1,7 +1,7 @@
 import Hero from "@/components/Hero";
 import Gallery from "@/components/Gallery";
-import Builder from "@/components/Builder";
-import { Nav, Steps, Reviews, Visit, Footer, MobileBar } from "@/components/Sections";
+import Order from "@/components/Order";
+import { Nav, Promises, Flavours, Steps, Reviews, Contact, Footer, MobileBar } from "@/components/Sections";
 
 export default function Page() {
   return (
@@ -9,11 +9,13 @@ export default function Page() {
       <Nav />
       <main>
         <Hero />
+        <Promises />
         <Gallery />
-        <Builder />
+        <Order />
+        <Flavours />
         <Steps />
         <Reviews />
-        <Visit />
+        <Contact />
       </main>
       <Footer />
       <MobileBar />

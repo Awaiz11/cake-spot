@@ -1,23 +1,24 @@
 import type { Metadata, Viewport } from "next";
-import "@fontsource-variable/fraunces/full.css";
-import "@fontsource/figtree/400.css";
-import "@fontsource/figtree/500.css";
-import "@fontsource/figtree/600.css";
+import "@fontsource/gloock/400.css";
+import "@fontsource/outfit/300.css";
+import "@fontsource/outfit/400.css";
+import "@fontsource/outfit/500.css";
+import "@fontsource/outfit/600.css";
 import "./globals.css";
 
 export const metadata: Metadata = {
   title: "Cake Spot | Customised Cakes in Gulberg, Lahore",
   description:
-    "Customised birthday, anniversary and theme cakes from Gulberg III, Lahore. Design your cake online and order on WhatsApp. Open daily 7 am to 2 am.",
-  icons: { icon: "/favicon.svg" },
+    "Custom theme cakes for birthdays, mehndis, weddings and more. Delivery across Lahore, as early as tomorrow. Order on WhatsApp.",
+  icons: { icon: "https://cakespot.pk/wp-content/uploads/2025/04/IMG_20250408_001138-1.png" },
   openGraph: {
     title: "Cake Spot | Customised Cakes, Gulberg Lahore",
-    description: "Design your cake and send it to us on WhatsApp. 4.9 stars from 570 Google reviews.",
-    images: ["https://images.unsplash.com/photo-1558301211-0d8c8ddee6ec?auto=format&fit=crop&w=1200&h=630&q=75"],
+    description: "Taste of Royalty. Custom cakes delivered across Lahore. 4.9 stars from 570 Google reviews.",
+    images: ["https://cakespot.pk/wp-content/uploads/2025/11/Lumii_20251102_115741538-scaled-650x650.jpg"],
   },
 };
 
-export const viewport: Viewport = { themeColor: "#F6DCE0" };
+export const viewport: Viewport = { themeColor: "#1E2328" };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
