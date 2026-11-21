@@ -1,9 +1,11 @@
 import type { Metadata, Viewport } from "next";
-import "@fontsource/gloock/400.css";
-import "@fontsource/outfit/300.css";
-import "@fontsource/outfit/400.css";
-import "@fontsource/outfit/500.css";
-import "@fontsource/outfit/600.css";
+import "@fontsource/baloo-2/600.css";
+import "@fontsource/baloo-2/700.css";
+import "@fontsource/baloo-2/800.css";
+import "@fontsource/nunito/400.css";
+import "@fontsource/nunito/600.css";
+import "@fontsource/nunito/700.css";
+import "@fontsource/dancing-script/700.css";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -18,7 +20,7 @@ export const metadata: Metadata = {
   },
 };
 
-export const viewport: Viewport = { themeColor: "#1E2328" };
+export const viewport: Viewport = { themeColor: "#19B8E6" };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
