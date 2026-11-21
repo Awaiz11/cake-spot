@@ -43,17 +43,6 @@ export default function Hero() {
       </div>
 
       <div className="vitrine">
-        <svg className="outline" viewBox="0 0 400 520" aria-hidden>
-          <path
-            pathLength={1}
-            d="M30 510 V200 A170 170 0 0 1 370 200 V510"
-          />
-          <path
-            pathLength={1}
-            className="o2"
-            d="M120 96 C150 40 250 40 280 96 M150 78 C175 58 225 58 250 78"
-          />
-        </svg>
         <div className="arch">
           {heroCakes.map((h, k) => (
             <img
@@ -65,6 +54,9 @@ export default function Hero() {
             />
           ))}
         </div>
+        <svg className="outline" viewBox="0 0 476 590" preserveAspectRatio="none" aria-hidden>
+          <path pathLength={1} vectorEffect="non-scaling-stroke" d="M4 586 V238 A234 234 0 0 1 472 238 V586" />
+        </svg>
         <div className="tag" aria-live="polite">
           <p className="tag-name">{c.name}</p>
           <p className="tag-note">{c.note}</p>
