@@ -1,109 +1,126 @@
-import { PHONE, reviews, waLink, WA } from "./data";
+import { EMAIL, flavours, INSTA, LOGO, PHONE, reviews, SITE, WA, waLink } from "./data";
 
 export function Nav() {
   return (
     <header className="nav">
-      <a href="#top" className="logo" aria-label="Cake Spot home">
-        <svg viewBox="0 0 40 40" aria-hidden>
-          <rect x="7" y="18" width="26" height="15" rx="4" fill="#F4B9C4" />
-          <path d="M7 22 Q11 28 14 22 Q17 28 20 22 Q23 28 26 22 Q29 28 33 22 V20 H7Z" fill="#C8323F" />
-          <rect x="18.5" y="9" width="3" height="9" rx="1" fill="#3B1F1A" />
-          <path d="M20 3 Q24 7 20 9 Q16 7 20 3Z" fill="#F5A623" />
-        </svg>
-        Cake Spot
+      <a href="#top" className="logo" aria-label="Cake Spot, back to top">
+        <img src={LOGO} alt="" width={52} height={52} />
+        <span>
+          Cake Spot
+          <small>Taste of Royalty</small>
+        </span>
       </a>
       <nav aria-label="Sections">
         <a href="#cakes">Cakes</a>
-        <a href="#design">Design yours</a>
+        <a href="#order">Custom order</a>
+        <a href="#flavours">Flavours</a>
         <a href="#reviews">Reviews</a>
-        <a href="#visit">Visit</a>
+        <a href="#contact">Contact</a>
       </nav>
-      <a className="btn btn-small" href={waLink("Assalam o Alaikum Cake Spot!")} target="_blank" rel="noreferrer">
+      <a className="btn btn-cyan btn-small" href={waLink("Assalam o Alaikum Cake Spot!")} target="_blank" rel="noreferrer">
         WhatsApp
       </a>
     </header>
   );
 }
 
-export function Steps() {
-  const steps = [
-    ["Show us the idea", "Use the cake designer above, or send any photo you found and say what to change."],
-    ["Get the price on WhatsApp", "We reply with the price, the flavour options and the earliest date we can make it."],
-    ["Collect it fresh", "Pick it up from our shop in Gulberg III, or ask us about delivery in Lahore."],
+export function Promises() {
+  const items = [
+    ["Delivery across Lahore", "As early as tomorrow, at the time you choose."],
+    ["Same as the picture", "Send any design. Our decorators match it, or make it your own."],
+    ["Pay the easy way", "JazzCash, EasyPaisa, bank transfer or card."],
   ];
   return (
-    <section className="steps" aria-labelledby="steps-h">
-      <h2 id="steps-h">How ordering works</h2>
-      <ol>
-        {steps.map(([t, d], i) => (
+    <section className="promises" aria-label="Why order from Cake Spot">
+      <ul>
+        {items.map(([t, d]) => (
           <li key={t}>
-            <span className="num" aria-hidden>{i + 1}</span>
+            <h3>{t}</h3>
+            <p>{d}</p>
+          </li>
+        ))}
+      </ul>
+    </section>
+  );
+}
+
+export function Flavours() {
+  return (
+    <section className="flavours" id="flavours" aria-labelledby="fl-h">
+      <h2 id="fl-h">Eleven flavours inside</h2>
+      <p className="sub">Every theme cake comes in any of these. Two-flavour cakes on request.</p>
+      <ul>
+        {flavours.map((f) => (
+          <li key={f.name} className={f.star ? "star" : ""}>
+            {f.name}
+            {f.star && <span>Best seller</span>}
+          </li>
+        ))}
+      </ul>
+    </section>
+  );
+}
+
+export function Steps() {
+  const s = [
+    ["Pick or describe your cake", "Choose one from our cakes, or send us a picture and your theme."],
+    ["Confirm on WhatsApp", "We share the price for your weight and flavour, and lock your date."],
+    ["Delivered fresh", "We bring it to your door in Lahore, or you pick it up from Gulberg III."],
+  ];
+  return (
+    <section className="steps" aria-labelledby="st-h">
+      <h2 id="st-h">How it works</h2>
+      <ol>
+        {s.map(([t, d], i) => (
+          <li key={t}>
+            <span className="n" aria-hidden>{i + 1}</span>
             <h3>{t}</h3>
             <p>{d}</p>
           </li>
         ))}
       </ol>
-      <p className="tip">For big cakes and tiers, tell us a few days early so we can fit your date.</p>
     </section>
   );
 }
 
 export function Reviews() {
   return (
-    <section className="reviews" id="reviews" aria-labelledby="rev-h">
-      <div className="rev-score">
-        <p className="big">4.9</p>
-        <p className="stars" aria-hidden>★★★★★</p>
-        <p>from 570 reviews on Google</p>
+    <section className="reviews" id="reviews" aria-labelledby="rv-h">
+      <div className="rv-head">
+        <h2 id="rv-h">Said after the party</h2>
+        <p><b>4.9</b> stars from 570 reviews on Google</p>
       </div>
-      <div>
-        <h2 id="rev-h">What people say after the party</h2>
-        <ul className="rev-list">
-          {reviews.map((r) => (
-            <li key={r.who}>
-              <blockquote>{r.q}</blockquote>
-              <p>{r.who}, Google review</p>
-            </li>
-          ))}
-        </ul>
-      </div>
+      <ul>
+        {reviews.map((r) => (
+          <li key={r.q}>
+            <blockquote>{r.q}</blockquote>
+            <p>{r.who} <span>on {r.src}</span></p>
+          </li>
+        ))}
+      </ul>
     </section>
   );
 }
 
-export function Visit() {
+export function Contact() {
   return (
-    <section className="visit" id="visit" aria-labelledby="visit-h">
-      <div className="visit-info">
-        <h2 id="visit-h">Come by the shop</h2>
-        <p className="addr">Block K, Gulberg III, Lahore</p>
-        <table className="hours">
-          <tbody>
-            <tr><th scope="row">Every day</th><td>7:00 am to 2:00 am</td></tr>
-          </tbody>
-        </table>
-        <div className="visit-ctas">
-          <a className="btn btn-main" href={waLink("Assalam o Alaikum Cake Spot!")} target="_blank" rel="noreferrer">
-            WhatsApp {PHONE}
-          </a>
-          <a className="btn btn-ghost" href={`tel:+${WA}`}>Call the shop</a>
-          <a
-            className="btn btn-ghost"
-            href="https://www.google.com/maps/search/?api=1&query=Cake+Spot+customized+cake+shop+Gulberg+Lahore"
-            target="_blank"
-            rel="noreferrer"
-          >
-            Get directions
-          </a>
+    <section className="contact" id="contact" aria-labelledby="ct-h">
+      <div className="ct-info">
+        <h2 id="ct-h">Talk to us</h2>
+        <dl>
+          <div><dt>WhatsApp and call</dt><dd><a href={`tel:+${WA}`}>{PHONE}</a></dd></div>
+          <div><dt>Email</dt><dd><a href={`mailto:${EMAIL}`}>{EMAIL}</a></dd></div>
+          <div><dt>Shop</dt><dd>Block K, Gulberg III, Lahore</dd></div>
+          <div><dt>Open</dt><dd>Every day, 7 am to 2 am</dd></div>
+          <div><dt>Instagram</dt><dd><a href={INSTA} target="_blank" rel="noreferrer">@cakespot.pk</a></dd></div>
+        </dl>
+        <div className="ct-btns">
+          <a className="btn btn-cyan" href={waLink("Assalam o Alaikum Cake Spot!")} target="_blank" rel="noreferrer">Message on WhatsApp</a>
+          <a className="btn btn-line" href="https://www.google.com/maps/search/?api=1&query=Cake+Spot+customized+cake+shop+Gulberg+Lahore" target="_blank" rel="noreferrer">Get directions</a>
         </div>
       </div>
       <div className="map">
-        <iframe
-          title="Cake Spot on Google Maps"
-          src="https://maps.google.com/maps?q=31.4998627,74.3569439&z=16&output=embed"
-          loading="lazy"
-          referrerPolicy="no-referrer-when-downgrade"
-        />
+        <iframe title="Cake Spot on Google Maps" src="https://maps.google.com/maps?q=31.4998627,74.3569439&z=15&output=embed" loading="lazy" referrerPolicy="no-referrer-when-downgrade" />
       </div>
     </section>
   );
@@ -112,11 +129,10 @@ export function Visit() {
 export function Footer() {
   return (
     <footer className="foot">
-      <p>Cake Spot, customised cakes in Gulberg III, Lahore.</p>
+      <img src={LOGO} alt="Cake Spot, Taste of Royalty" width={72} height={72} />
+      <p>Cake Spot, custom cakes in Lahore. <a href={SITE} target="_blank" rel="noreferrer">cakespot.pk</a></p>
       <p className="credit">
-        Preview website made for Cake Spot by{" "}
-        <a href="https://portfolio1-hazel-seven.vercel.app" target="_blank" rel="noreferrer">NexaFlow (Aawaiz Ijaz)</a>.
-        Gallery photos are samples from Unsplash.
+        Website redesign preview by <a href="https://portfolio1-hazel-seven.vercel.app" target="_blank" rel="noreferrer">NexaFlow (Aawaiz Ijaz)</a>. Photos and details from Cake Spot&apos;s own website and Instagram.
       </p>
     </footer>
   );
@@ -125,10 +141,8 @@ export function Footer() {
 export function MobileBar() {
   return (
     <div className="mbar">
-      <a href="#design">Design a cake</a>
-      <a href={waLink("Assalam o Alaikum Cake Spot! I want to order a cake.")} target="_blank" rel="noreferrer" className="wa">
-        WhatsApp us
-      </a>
+      <a href="#order">Custom order</a>
+      <a className="wa" href={waLink("Assalam o Alaikum Cake Spot! I want to order a cake.")} target="_blank" rel="noreferrer">WhatsApp</a>
     </div>
   );
 }
