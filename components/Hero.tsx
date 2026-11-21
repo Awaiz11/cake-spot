@@ -1,79 +1,60 @@
-"use client";
-import { useEffect, useState } from "react";
-import { full, heroCakes, rs, waLink } from "./data";
+import { cakes, LOGO, thumb, waLink } from "./data";
+
+const ring = [0, 1, 2, 3, 6, 7, 9, 12].map((i) => cakes[i]);
 
 export default function Hero() {
-  const [i, setI] = useState(0);
-  useEffect(() => {
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-    const id = setInterval(() => setI((n) => (n + 1) % heroCakes.length), 4200);
-    return () => clearInterval(id);
-  }, []);
-  const c = heroCakes[i];
-
   return (
     <section className="hero" id="top">
-      <div className="hero-copy">
-        <p className="hero-kicker">Cake Spot, Gulberg III, Lahore</p>
-        <h1>
-          Taste of royalty,
-          <br />
-          made to your theme.
-        </h1>
-        <p className="lede">
-          Custom cakes for birthdays, mehndis, weddings and every celebration in between. Tell us the
-          theme, we design and bake it, and deliver anywhere in Lahore, as early as tomorrow.
-        </p>
-        <div className="hero-ctas">
-          <a className="btn btn-cyan" href="#cakes">See our cakes</a>
-          <a
-            className="btn btn-line"
-            href={waLink("Assalam o Alaikum Cake Spot! I want to order a customised cake.")}
-            target="_blank"
-            rel="noreferrer"
-          >
-            Order on WhatsApp
-          </a>
-        </div>
-        <ul className="proof">
-          <li><b>4.9</b> stars from 570 Google reviews</li>
-          <li><b>11.7K</b> followers on Instagram</li>
-          <li><b>1,000+</b> cakes posted</li>
-        </ul>
+      <div className="sprinkles" aria-hidden>
+        {Array.from({ length: 18 }).map((_, k) => (
+          <i key={k} style={{ left: `${(k * 37) % 100}%`, top: `${(k * 53) % 90}%`, animationDelay: `${(k % 6) * 0.7}s` }} />
+        ))}
       </div>
 
-      <div className="vitrine">
-        <div className="arch">
-          {heroCakes.map((h, k) => (
-            <img
-              key={h.img}
-              src={full(h.img)}
-              alt={h.name}
-              className={k === i ? "on" : ""}
-              fetchPriority={k === 0 ? "high" : "low"}
-            />
+      <div className="hero-copy reveal">
+        <p className="script">Taste of Royalty</p>
+        <h1>
+          Lahore&apos;s favourite
+          {" "}<span className="hl">custom cakes</span>
+        </h1>
+        <p className="lede">
+          Birthdays, mehndis, weddings and every party in between. Send us your idea, we bake it exactly
+          like the picture and deliver anywhere in Lahore.
+        </p>
+        <div className="hero-ctas">
+          <a className="btn btn-pink" href="#order">Order a custom cake</a>
+          <a className="btn btn-white" href="#cakes">Browse cakes</a>
+        </div>
+        <div className="trust">
+          <span className="stars" aria-hidden>★★★★★</span>
+          <span><b>4.9</b> on Google from 570 reviews</span>
+          <span className="sep" aria-hidden />
+          <span><b>11.7K</b> on Instagram</span>
+        </div>
+      </div>
+
+      <div className="orbit-wrap reveal" aria-label="Some of our cakes">
+        <div className="orbit-glow" aria-hidden />
+        <div className="orbit-track" aria-hidden />
+        <ul className="orbit">
+          {ring.map((c, k) => (
+            <li key={c.name} style={{ ["--a" as string]: `${k * 45}deg` }}>
+              <a
+                href={waLink(`Assalam o Alaikum Cake Spot! I like the "${c.name}" cake. Please share the price.`)}
+                target="_blank"
+                rel="noreferrer"
+                title={c.name}
+              >
+                <img src={thumb(c.img)} alt={c.name} width={130} height={130} />
+              </a>
+            </li>
           ))}
+        </ul>
+        <div className="orbit-center">
+          <img src={LOGO} alt="Cake Spot logo" width={200} height={200} />
         </div>
-        <svg className="outline" viewBox="0 0 476 590" preserveAspectRatio="none" aria-hidden>
-          <path pathLength={1} vectorEffect="non-scaling-stroke" d="M4 586 V238 A234 234 0 0 1 472 238 V586" />
-        </svg>
-        <div className="tag" aria-live="polite">
-          <p className="tag-name">{c.name}</p>
-          <p className="tag-note">{c.note}</p>
-          <p className="tag-price">from {rs(c.from)}</p>
-        </div>
-        <div className="dots" role="tablist" aria-label="Featured cakes">
-          {heroCakes.map((h, k) => (
-            <button
-              key={h.name}
-              role="tab"
-              aria-selected={k === i}
-              aria-label={h.name}
-              className={k === i ? "on" : ""}
-              onClick={() => setI(k)}
-            />
-          ))}
-        </div>
+        <p className="badge b1">Delivery as early as <b>tomorrow</b></p>
+        <p className="badge b2"><b>Rs 200 off</b> first order</p>
       </div>
     </section>
   );

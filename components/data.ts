@@ -15,6 +15,15 @@ export const full = (p: string) => UP + p.replace("~", "");
 
 export type Cat = "Kids" | "Weddings" | "Mehndi & bridal" | "Engagement" | "For her" | "More themes";
 
+export const rows: { cat: Cat; title: string; id: string; cover: string }[] = [
+  { cat: "Kids", title: "Kids' birthday cakes", id: "kids", cover: "2025/11/Lumii_20251102_115741538-scaled~.jpg" },
+  { cat: "Mehndi & bridal", title: "Mehndi and bridal", id: "mehndi", cover: "2025/07/Dholki-cake-2~.webp" },
+  { cat: "Weddings", title: "Wedding cakes", id: "wedding", cover: "2025/07/Lumii_20250126_184452608~.jpg" },
+  { cat: "Engagement", title: "Engagement", id: "engagement", cover: "2025/09/43c25756423b6faf47f756ac3efe4f4d~.jpg" },
+  { cat: "For her", title: "Cakes for her", id: "for-her", cover: "2025/07/Lumii_20240627_210238201~.jpg" },
+  { cat: "More themes", title: "Graduation, sports and more", id: "more", cover: "2025/09/IMG-20250802-WA0112~.jpg" },
+];
+
 export type Cake = { name: string; cat: Cat; from: number; to: number; img: string };
 
 export const cakes: Cake[] = [

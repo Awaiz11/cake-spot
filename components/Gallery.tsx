@@ -1,69 +1,67 @@
 "use client";
-import { useState } from "react";
-import { cakes, rs, thumb, waLink, SITE, type Cat } from "./data";
+import { useRef } from "react";
+import { cakes, rows, rs, thumb, waLink, SITE } from "./data";
 
-const cats: ("All" | Cat)[] = ["All", "Kids", "Mehndi & bridal", "Weddings", "Engagement", "For her", "More themes"];
-
-export default function Gallery() {
-  const [cat, setCat] = useState<(typeof cats)[number]>("All");
-  const [more, setMore] = useState(false);
-  const list = cat === "All" ? cakes : cakes.filter((c) => c.cat === cat);
-  const items = cat === "All" && !more ? list.slice(0, 12) : list;
-
+function Row({ title, id, cat }: { title: string; id: string; cat: string }) {
+  const ref = useRef<HTMLUListElement>(null);
+  const list = cakes.filter((c) => c.cat === cat);
+  const go = (d: number) => ref.current?.scrollBy({ left: d * ref.current.clientWidth * 0.8, behavior: "smooth" });
   return (
-    <section className="gallery" id="cakes" aria-labelledby="cakes-h">
-      <div className="sec-head">
-        <h2 id="cakes-h">Cakes from our kitchen</h2>
-        <p>
-          Real cakes we have made, with their starting price. Like one? Ask for it as it is, or tell us
-          what to change.
-        </p>
+    <div className="row reveal" id={id}>
+      <div className="row-head">
+        <h3>{title}</h3>
+        <div className="arrows">
+          <button onClick={() => go(-1)} aria-label={`Previous ${title}`}>‹</button>
+          <button onClick={() => go(1)} aria-label={`More ${title}`}>›</button>
+        </div>
       </div>
-
-      <div className="tabs" role="tablist" aria-label="Occasion">
-        {cats.map((c) => (
-          <button
-            key={c}
-            role="tab"
-            aria-selected={cat === c}
-            className={cat === c ? "on" : ""}
-            onClick={() => { setCat(c); setMore(false); }}
-          >
-            {c}
-          </button>
-        ))}
-      </div>
-
-      <ul className="cards" key={cat + more}>
-        {items.map((c, k) => (
-          <li key={c.name} style={{ animationDelay: `${Math.min(k, 8) * 45}ms` }}>
-            <div className="ph">
-              <img src={thumb(c.img)} alt={c.name} loading="lazy" width={650} height={650} />
-              <span className="pill">{c.cat}</span>
-            </div>
-            <div className="meta">
-              <h3>{c.name}</h3>
-              <p>{rs(c.from)} to {rs(c.to)}</p>
-            </div>
+      <ul className="strip" ref={ref}>
+        {list.map((c) => (
+          <li key={c.name} className="cake">
             <a
-              className="ask"
-              href={waLink(`Assalam o Alaikum Cake Spot! I'm interested in the "${c.name}" cake (${c.cat}). Please share sizes and price.`)}
+              href={waLink(`Assalam o Alaikum Cake Spot! I'm interested in the "${c.name}" cake. Please share sizes and price.`)}
               target="_blank"
               rel="noreferrer"
             >
-              Ask for this cake
+              <span className="ph">
+                <img src={thumb(c.img)} alt={c.name} loading="lazy" width={300} height={300} />
+                <span className="hover">Order on WhatsApp</span>
+              </span>
+              <span className="nm">{c.name}</span>
+              <span className="pr">from {rs(c.from)}</span>
+            </a>
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+}
+
+export default function Gallery() {
+  return (
+    <section className="gallery" id="cakes" aria-labelledby="cakes-h">
+      <div className="sec-head center reveal">
+        <p className="script">Fresh from our kitchen</p>
+        <h2 id="cakes-h">Pick your occasion</h2>
+      </div>
+
+      <ul className="bubbles reveal">
+        {rows.map((r) => (
+          <li key={r.id}>
+            <a href={`#${r.id}`}>
+              <span className="ring"><img src={thumb(r.cover)} alt="" width={120} height={120} /></span>
+              {r.title.replace(" cakes", "").replace("Graduation, sports and more", "More themes")}
             </a>
           </li>
         ))}
       </ul>
 
-      <div className="gallery-foot">
-        {cat === "All" && !more && (
-          <button className="btn btn-line" onClick={() => setMore(true)}>Show all {cakes.length} cakes</button>
-        )}
-        <a className="btn btn-ghost-dark" href={SITE} target="_blank" rel="noreferrer">Full menu on cakespot.pk</a>
-      </div>
-      <p className="fine">Price depends on weight, from the smallest size to the largest. Every design can be changed to your colours, name and theme.</p>
+      {rows.map((r) => <Row key={r.id} {...r} />)}
+
+      <p className="more reveal">
+        Prices start from the smallest weight. Any design can be changed to your colours and name.{" "}
+        <a href={SITE} target="_blank" rel="noreferrer">See the full menu on cakespot.pk</a>
+      </p>
     </section>
   );
 }
